@@ -56,8 +56,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 scaler = StandardScaler()
 
 # Create an ensemble of 3 models
-estimators = []
-estimators.append(('logistic', LogisticRegression()))
+estimators = [('logistic', LogisticRegression())]
 estimators.append(('cart', DecisionTreeClassifier()))
 estimators.append(('gradient_booster', GradientBoostingClassifier(learning_rate= 0.01, n_estimators= 500, min_samples_split= 3, max_features= "log2", max_depth= 3)))
 

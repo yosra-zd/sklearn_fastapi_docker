@@ -50,7 +50,8 @@ async def model_info():
     """Return model information, version, how to call"""
     return {
         "name": model_name,
-        "version": version
+        "version": version,
+        "description": "Predict churn based on customer data"
     }
 
 
@@ -65,5 +66,4 @@ async def service_health():
 @api.post('/predict', response_model=Output)
 async def model_predict(input: Input):
     """Predict with input"""
-    response = get_model_response(input)
-    return response
+    return get_model_response(input)
