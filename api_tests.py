@@ -24,7 +24,7 @@ import main
 from main import api
 from fastapi.testclient import TestClient	
 def test1_model_predict():	
-    client = TestClient(api)
+    client = TestClient(main.api)
 
     Input={
            'tenure': 29,
