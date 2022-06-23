@@ -20,11 +20,11 @@ def test_service_health():
     data = response.json()
 
     assert data["health"] == "ok"
-import main
-from main import api
+#import main
+from .main import api
 from fastapi.testclient import TestClient	
 def test1_model_predict():	
-    client = TestClient(main.api)
+    client = TestClient(api)
 
     Input={
            'tenure': 29,
