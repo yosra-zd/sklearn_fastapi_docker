@@ -37,7 +37,7 @@ def prepare_data(file):
     #if file is not None:
        # importing the dataset
        file="data/batch_file.csv"
-       df = pd.read_csv(file,sep=';')
+       df = pd.read_csv(file)
        df.head()
        return df
 	
