@@ -23,7 +23,7 @@ def test_service_health():
 #import main
 from .main import api
 from fastapi.testclient import TestClient	
-def test1_model_predict():	
+def test_model_predict():	
     client = TestClient(api)
 
     Input={
@@ -35,7 +35,7 @@ def test1_model_predict():
             'device_protection': 0,
             'contract_month_to_month': 0,
             'payment_method_electronic_check': 1}
-    response = client.post('/predict', json=input)
+    response = client.post('/predict', json=Input)
     assert response.status_code == 200, response.content
     data = response.json()
 
