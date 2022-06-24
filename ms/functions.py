@@ -76,8 +76,8 @@ def batch_file_predict(input):
     #Get batch prediction
     prediction = model.predict(input)
     prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
-    prediction_df = prediction_df.replace({1:'Yes, this customer is future churner',
-                                           0:'No, the customer is non furture churner'})
+    prediction_df = prediction_df.replace({1:'Yes',
+                                           0:'No'})
     file="data/batch_churn.csv"
     df = pd.read_csv(file)
     output = pd.concat([df,prediction_df], axis = 1)
