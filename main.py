@@ -84,7 +84,7 @@ async def batch_predict(file: UploadFile = File(...)):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     data_churn=prepare_data(file)
-    return pd.json_normalize(data_churn.__dict__)
+    return data_churn
     #response = batch_file_predict(data_churn)
      # return the response as a JSON
     #return {
