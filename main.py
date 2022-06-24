@@ -84,7 +84,10 @@ async def batch_predict(file: UploadFile = File(...)):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     #file="data/batch_churn.csv"
-    df = pd.read_csv(file)
+    contents = await file.read()
+    buffer = BytesIO(contents)
+    df = pd.read_csv(buffer)
+    buffer.close()
     data_churn = prepare_data(df)
     response = batch_file_predict(data_churn)
     response.to_csv('data/result.csv',sep='\t')
