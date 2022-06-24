@@ -58,7 +58,7 @@ def prepare_data(file):
        df = pd.get_dummies(df)
        return df
 	
-def batch_predict(input):    
+def batch_file_predict(input):    
     #model=load_model()
     #Get batch prediction
     prediction = model.predict(input)
