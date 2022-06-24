@@ -38,8 +38,8 @@ def prepare_data(file):
     #if file is not None:
        # importing the dataset
        #file="data/batch_churn.csv"
-       #df = pd.read_csv(file,sep=';')
-       df = pd.read_csv(file)
+       df = pd.read_csv(file,sep=';')
+       #df = pd.read_csv(file)
        # drop de customerID qui n'est pas une information utile
        df.drop(columns='customerID', inplace=True)
        # Transformation des labels en données binaires
