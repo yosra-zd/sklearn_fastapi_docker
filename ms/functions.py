@@ -34,7 +34,7 @@ def get_model_response(input):
     }
 	
 def prepare_data(file):
-    if uploaded_file is not None:
+    if file is not None:
        # importing the dataset
        df = pd.read_csv(file)
        # drop de customerID qui n'est pas une information utile
