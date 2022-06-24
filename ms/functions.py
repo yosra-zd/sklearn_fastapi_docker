@@ -1,9 +1,5 @@
 import pandas as pd
 import joblib
-<<<<<<< HEAD
-
-model = joblib.load("model/model_binary.dat.gz")
-=======
 from sklearn.preprocessing import MinMaxScaler
 
 #def load_model():
@@ -14,23 +10,17 @@ from sklearn.preprocessing import MinMaxScaler
     #print("Model loaded")
     #return model
 
->>>>>>> yosradev
 
 def predict(X, model):
     prediction = model.predict(X)[0]
     return prediction
-<<<<<<< HEAD
 
-
-def get_model_response(input):    
-    X = pd.json_normalize(input.__dict__)
-=======
 model = joblib.load("model/model_binary.dat.gz")
 
 def get_model_response(input):
     X = pd.json_normalize(input.__dict__)
     #model=load_model()
->>>>>>> yosradev
+
     prediction = predict(X.values, model)
     probability = model.predict_proba(X.values)[0][prediction]
     if prediction == 1:
@@ -42,11 +32,6 @@ def get_model_response(input):
         'prediction': int(prediction),
         'probability': round(probability, 2)
     }
-<<<<<<< HEAD
-    
-    
-    
-=======
 	
 def prepare_data(file):
     if uploaded_file is not None:
@@ -85,4 +70,4 @@ def batch_file_predict(input):
     return prediction_df
 	 
        
->>>>>>> yosradev
+

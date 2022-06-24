@@ -9,11 +9,6 @@ def test_model_info():
     )
 
     assert response.status_code == 200, response.content
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> yosradev
 def test_service_health():
     response = requests.get(
         url=f"{API_URL}/health"
@@ -24,17 +19,12 @@ def test_service_health():
     data = response.json()
 
     assert data["health"] == "ok"
-<<<<<<< HEAD
-import main
-from main import api
-from fastapi.testclient import TestClient
-def test1_model_predict():
-=======
+
 #import main
 from .main import api
 from fastapi.testclient import TestClient	
 def test_model_predict():	
->>>>>>> yosradev
+
     client = TestClient(api)
 
     Input={
