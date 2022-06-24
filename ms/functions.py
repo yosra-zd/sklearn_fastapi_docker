@@ -61,7 +61,13 @@ def prepare_data(file):
        df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
        df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
        df = pd.get_dummies(df)
-       df.head()
+       df=df[['tenure','paperless_billing',
+            'internet_service_fiber_optic',
+            'no_internet_service',
+            'online_security',
+            'device_protection',
+            'contract_month_to_month',
+            'payment_method_electronic_check']]
        return df
 	
 def batch_file_predict(input):    
