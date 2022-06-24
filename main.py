@@ -75,7 +75,7 @@ class Prediction(BaseModel):
     filename: str
     content_type: str
     predictions: List[dict] = []	
-@api.post('/batch_predict'), response_model=Prediction)
+@api.post('/batch_predict', response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
