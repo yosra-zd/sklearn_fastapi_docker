@@ -1,5 +1,5 @@
 import uvicorn
-
+import pandas as pd
 from fastapi import FastAPI,File,UploadFile,HTTPException
 
 
@@ -75,7 +75,8 @@ class Prediction(BaseModel):
     filename: str
     content_type: str
     predictions: List[dict] = []	
-@api.post('/batch_predict', response_model=Prediction)
+@api.post('/batch_predict')
+#, response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
@@ -83,7 +84,7 @@ async def batch_predict(file: UploadFile = File(...)):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     data_churn=prepare_data(file)
-    return data_churn
+    return pd.json_normalize(data_churn.__dict__)
     #response = batch_file_predict(data_churn)
      # return the response as a JSON
     #return {
