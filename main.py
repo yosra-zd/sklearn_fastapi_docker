@@ -90,5 +90,5 @@ async def batch_predict(file: UploadFile = File(...)):
     #    "filename": file.filename,
     #    "content_type": file.content_type,
     #    "predictions": response,
-    "}
+    #"}
 
