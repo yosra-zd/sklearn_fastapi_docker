@@ -5,7 +5,7 @@ from fastapi import FastAPI,File,UploadFile,HTTPException
 from pydantic import BaseModel, Field
 from typing import List
 
-from ms.functions import get_model_response,batch_predict,prepare_data
+from ms.functions import get_model_response,batch_file_predict,prepare_data
 
 model_name = "Churn model"
 version = "v1.0.0"
