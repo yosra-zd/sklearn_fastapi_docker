@@ -34,7 +34,7 @@ def get_model_response(input):
         'probability': round(probability, 2)
     }
 	
-def prepare_data(file):
+def prepare_data(df):
     #if file is not None:
        # importing the dataset
        #file="data/batch_churn.csv"
