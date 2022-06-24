@@ -78,8 +78,8 @@ class Prediction(BaseModel):
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
-    if not file.content_type.startswith("csv/"):
-        raise HTTPException(status_code=400, detail="File format provided is not valid.")
+    #if not file.content_type.startswith("csv/"):
+    #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     data_churn=prepare_data(file)
     response = batch_predict(data_churn)
