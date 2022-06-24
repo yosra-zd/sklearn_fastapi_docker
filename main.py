@@ -71,6 +71,12 @@ async def model_predict(input: Input):
     return response
 
 
+@api.get('/healthy')
+async def service_healthy():
+    """Return service health"""
+    return {
+        "healthy": "ok"
+    }
 # Define the response JSON
 class Prediction(BaseModel):
     filename: str
