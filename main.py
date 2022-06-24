@@ -83,7 +83,7 @@ async def batch_predict(file: UploadFile = File(...)):
     #if not file.content_type.startswith("text/csv"):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
-    
+    file="data/batch_churn.csv"
     data_churn = prepare_data(file)
     response = batch_file_predict(data_churn)
     response.to_csv('data/result.csv',sep='\t')
