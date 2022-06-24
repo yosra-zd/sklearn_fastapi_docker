@@ -86,6 +86,7 @@ async def batch_predict(file: UploadFile = File(...)):
     
     data_churn = prepare_data(file)
     response = batch_file_predict(data_churn)
+    response.to_csv('data/result.csv',sep='\t')
     return response.to_json()
    
     #response = batch_file_predict(data_churn)
