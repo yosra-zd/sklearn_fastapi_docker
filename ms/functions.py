@@ -3,13 +3,13 @@ import numpy as np
 import joblib
 from sklearn.preprocessing import MinMaxScaler
 
-#def load_model():
- #   """
-  #  Loads and returns the pretrained model
-   # """
-    #model = joblib.load("model/model_binary.dat.gz")
-    #print("Model loaded")
-    #return model
+def load_model():
+    """
+    Loads and returns the pretrained model
+    """
+    model = joblib.load("model/model_binary.dat.gz")
+    print("Model loaded")
+    return model
 
 
 def predict(X, model):
@@ -72,7 +72,7 @@ def prepare_data(file):
        return df
 	
 def batch_file_predict(input):    
-    #model=load_model()
+    model=load_model()
     #Get batch prediction
     prediction = model.predict(input)
     prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
