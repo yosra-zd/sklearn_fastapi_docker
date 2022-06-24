@@ -37,9 +37,9 @@ def prepare_data(file):
     #if file is not None:
        # importing the dataset
        file="data/batch_file.csv"
-       df = pd.read_csv(file)
+       df = pd.read_csv(file,sep=';')
        df.head()
-       return df
+       #return df
 	
 def batch_file_predict(input):    
     #model=load_model()
