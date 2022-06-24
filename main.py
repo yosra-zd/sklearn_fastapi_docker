@@ -7,7 +7,7 @@ from fastapi import FastAPI,File,UploadFile,HTTPException
 from pydantic import BaseModel, Field
 from typing import List
 
-from ms.functions import get_model_response,batch_file_predict,prepare_data
+from ms.functions import get_model_response,batch_predict,prepare_data
 
 model_name = "Churn model"
 version = "v1.0.0"
@@ -77,7 +77,7 @@ async def batch_predict(file: UploadFile = File(...)):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     data_churn=prepare_data(file)
-    response = batch_file_predict(data_churn)
+    response = batch_predict(data_churn)
      # return the response as a JSON
     return {
         "filename": file.filename,
