@@ -36,7 +36,7 @@ def get_model_response(input):
 def prepare_data(file):
     #if file is not None:
        # importing the dataset
-       file="data/batch_file.csv"
+       file="data/batch_churn.csv"
        df = pd.read_csv(file,sep=';')
        df.head()
        return df
