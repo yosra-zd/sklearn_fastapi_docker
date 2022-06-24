@@ -1,11 +1,19 @@
 import uvicorn
+<<<<<<< HEAD
 from fastapi import FastAPI
+=======
+from fastapi import FastAPI,File,UploadFile,HTTPException
+>>>>>>> yosradev
 
 # Third party imports
 from pydantic import BaseModel, Field
 from typing import List
 
+<<<<<<< HEAD
 from ms.functions import get_model_response
+=======
+from ms.functions import get_model_response,batch_file_predict,prepare_data
+>>>>>>> yosradev
 
 model_name = "Churn model"
 version = "v1.0.0"
@@ -66,4 +74,30 @@ async def service_health():
 async def model_predict(input: Input):
     """Predict with input"""
     response = get_model_response(input)
+<<<<<<< HEAD
     return response
+=======
+    return response
+
+
+# Define the response JSON
+class Prediction(BaseModel):
+    filename: str
+    content_type: str
+    predictions: List[dict] = []	
+@api.post('/batch_predict', response_model=Prediction)
+async def batch_predict(file: UploadFile = File(...)):
+    """Predict with file input"""
+    # Ensure that the file is a CSV
+    #if not file.content_type.startswith("csv/"):
+    #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
+    #content = await file.read()
+    data_churn=prepare_data(file)
+    response = batch_file_predict(data_churn)
+     # return the response as a JSON
+    return {
+        "filename": file.filename,
+        "content_type": file.content_type,
+        "predictions": response,
+    }
+>>>>>>> yosradev
