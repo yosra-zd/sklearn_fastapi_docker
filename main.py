@@ -70,19 +70,12 @@ async def model_predict(input: Input):
     response = get_model_response(input)
     return response
 
-
-@api.get('/healthy')
-async def service_healthy():
-    """Return service health"""
-    return {
-        "healthy": "ok"
-    }
 # Define the response JSON
 class Prediction(BaseModel):
     filename: str
     content_type: str
     predictions: List[dict] = []	
-@api.post('/batch_predict', response_model=Prediction)
+@api.post('/batch_predict')#, response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
@@ -90,11 +83,12 @@ async def batch_predict(file: UploadFile = File(...)):
     #    raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
     data_churn=prepare_data(file)
-    response = batch_file_predict(data_churn)
+    return data_churn
+    #response = batch_file_predict(data_churn)
      # return the response as a JSON
-    return {
-        "filename": file.filename,
-        "content_type": file.content_type,
-        "predictions": response,
-    }
+    #return {
+    #    "filename": file.filename,
+    #    "content_type": file.content_type,
+    #    "predictions": response,
+    "}
 
