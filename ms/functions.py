@@ -38,27 +38,6 @@ def prepare_data(file):
        # importing the dataset
        file="data/batch_file.csv"
        df = pd.read_csv(file)
-       # drop de customerID qui n'est pas une information utile
-       df.drop(columns='customerID', inplace=True)
-       # Transformation des labels en données binaires
-       df.gender = pd.Series(np.where(df.gender.values == 'Male', 1, 0), df.index)
-       df.Partner = pd.Series(np.where(df.Partner.values == 'Yes', 1, 0), df.index)
-       df.Dependents = pd.Series(np.where(df.Dependents.values == 'Yes', 1, 0), df.index)
-       df.PhoneService = pd.Series(np.where(df.PhoneService.values == 'Yes', 1, 0), df.index)
-       df.SeniorCitizen = pd.Series(np.where(df.SeniorCitizen.values == 'Yes', 1, 0), df.index)
-       df.PaperlessBilling = pd.Series(np.where(df.PaperlessBilling.values == 'Yes', 1, 0), df.index)
-       # Correction du type de données de TotalChurn
-       # on commence par remplacer les champs vide de la colonne TotalCharges par 0 
-       df.TotalCharges = pd.Series(np.where(df.tenure == 0, 0, df.TotalCharges), df.index)
-       # On change ensuite le type de la colonne TotalCharges en type numérique float 
-       # df.TotalCharges = pd.to_numeric(df.TotalCharges, errors='coerce')
-       df.TotalCharges = pd.to_numeric(df.TotalCharges, downcast="float")
-	   #feature scaling
-       sc = MinMaxScaler()
-       df['tenure'] = sc.fit_transform(df[['tenure']])
-       df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
-       df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
-       df = pd.get_dummies(df)
        df.head()
        return df
 	
