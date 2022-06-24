@@ -58,6 +58,7 @@ def prepare_data(file):
        df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
        df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
        df = pd.get_dummies(df)
+       df.head()
        return df
 	
 def batch_file_predict(input):    
