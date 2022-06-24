@@ -63,19 +63,12 @@ async def service_health():
         "health": "ok"
     }
 
-
-@api.post('/predict', response_model=Output)
-async def model_predict(input: Input):
-    """Predict with input"""
-    response = get_model_response(input)
-    return response
-
-
 # Define the response JSON
 class Prediction(BaseModel):
     filename: str
     content_type: str
     predictions: List[dict] = []	
+        
 @api.post('/batch_predict', response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
@@ -91,4 +84,12 @@ async def batch_predict(file: UploadFile = File(...)):
         "content_type": file.content_type,
         "predictions": response,
     }
+
+@api.post('/predict', response_model=Output)
+async def model_predict(input: Input):
+    """Predict with input"""
+    response = get_model_response(input)
+    return response
+
+
 
