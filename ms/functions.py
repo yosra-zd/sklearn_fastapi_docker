@@ -18,7 +18,7 @@ def predict(X, model):
 
 def get_model_response(input):    
     X = pd.json_normalize(input.__dict__)
-	model=load_model()
+    model=load_model()
     prediction = predict(X.values, model)
     probability = model.predict_proba(X.values)[0][prediction]
     if prediction == 1:
@@ -56,14 +56,15 @@ def prepare_data(file):
        df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
        df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
        df = pd.get_dummies(df)
-	   return df
+       return df
 	
 def batch_predict(input):    
+    model=load_model()
     #Get batch prediction
     prediction = model.predict(input)
     prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
-    prediction_df = prediction_df.replace({1:'Yes, this customer is future churner', 
-                                                    0:'No, the customer is non furture churner'})
+    prediction_df = prediction_df.replace({1:'Yes, this customer is future churner',
+                                           0:'No, the customer is non furture churner'})
     return prediction_df
 	 
        

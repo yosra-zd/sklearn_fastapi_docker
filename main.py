@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI,File,UploadFile,HTTPException
 
 # Third party imports
 from pydantic import BaseModel, Field
@@ -77,11 +77,11 @@ class Prediction(BaseModel):
 @api.post('/batch_predict', response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
-	# Ensure that the file is a CSV
+    # Ensure that the file is a CSV
     if not file.content_type.startswith("csv/"):
         raise HTTPException(status_code=400, detail="File format provided is not valid.")
     #content = await file.read()
-	data_churn=prepare_data(file)
+    data_churn=prepare_data(file)
     response = batch_predict(data_churn)
      # return the response as a JSON
     return {
