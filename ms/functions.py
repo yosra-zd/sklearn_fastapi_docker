@@ -34,8 +34,9 @@ def get_model_response(input):
     }
 	
 def prepare_data(file):
-    if file is not None:
+    #if file is not None:
        # importing the dataset
+       file="data/batch_file.csv"
        df = pd.read_csv(file)
        # drop de customerID qui n'est pas une information utile
        df.drop(columns='customerID', inplace=True)
