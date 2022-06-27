@@ -45,7 +45,7 @@ def test_batch_predict():
      client = TestClient(api)
 
      Input_File="data/batch_churn.csv" 
-     response = client.post('/batch_predict', json=Input_file)
+     response = client.post('/batch_predict', json=Input_File)
      assert response.status_code == 200, response.content
      data = response.json()
 
