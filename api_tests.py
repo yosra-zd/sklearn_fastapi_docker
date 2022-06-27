@@ -50,5 +50,5 @@ def test_batch_predict():
           assert response.status_code == 200, response.content
           data = json.loads(response.json())
 
-          assert data["Predictions"][0] == "No"
+          assert data['Predictions']['0'] == "No"
 
