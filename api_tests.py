@@ -51,5 +51,5 @@ def test_batch_predict():
           data = json.loads(response.json())
 
           #assert data['Predictions']['0'] == "No"
-          assert data['Predictions']=[{'0':"No",'1':"yes",'2':"No",'3':"No",'4':"No"}]
+          assert data['Predictions'] == [{'0':"No",'1':"yes",'2':"No",'3':"No",'4':"No"}]
 
