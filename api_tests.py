@@ -41,3 +41,15 @@ def test_model_predict():
     data = response.json()
 
     assert data["prediction"] == 0
+    
+    def test_batch_predict():	
+
+    client = TestClient(api)
+
+    Input_File="data/batch_churn.csv" 
+    response = client.post('/batch_predict', json=Input_file)
+    assert response.status_code == 200, response.content
+    data = response.json()
+
+    assert data["Predictions"] == {\"0\":\"No\",\"1\":\"Yes\",\"2\":\"No\",\"3\":\"No\",\"4\":\"No\"}
+
