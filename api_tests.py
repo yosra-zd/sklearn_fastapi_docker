@@ -48,7 +48,7 @@ def test_batch_predict():
      with open(fpath, "rb") as f:
           response = client.post("/batch_predict", files={"file": ("filename", f, "application/vnd.ms-excel")}) 
           assert response.status_code == 200, response.content
-          data = response.json()
+          data = json.loads(response.json())
 
-          assert data["Predictions"] == "{0:No,1:Yes,2:No,3:No,4:No}"
+          assert data["Predictions"][0] == "No"
 
