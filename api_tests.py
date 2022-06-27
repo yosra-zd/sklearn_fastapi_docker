@@ -21,7 +21,7 @@ def test_service_health():
     assert data["health"] == "ok"
 
 #import main
-from .main import api
+from main import api
 from fastapi.testclient import TestClient	
 def test_model_predict():	
 
