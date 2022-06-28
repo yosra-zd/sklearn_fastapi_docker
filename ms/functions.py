@@ -41,7 +41,7 @@ def prepare_data(df):
     #df = pd.read_csv(file,sep=',')
     #df = pd.read_csv(file)
     # drop de customerID qui n'est pas une information utile
-    df.drop(columns='customerID', inplace=True)
+    #df.drop(columns='customerID', inplace=True)
     # Transformation des labels en données binaires
     df.gender = pd.Series(np.where(df.gender.values == 'Male', 1, 0), df.index)
     df.Partner = pd.Series(np.where(df.Partner.values == 'Yes', 1, 0), df.index)
@@ -65,8 +65,8 @@ def prepare_data(df):
    	       'PaperlessBilling',
    	       'InternetService_Fiber optic',
    	       'InternetService_No',
-               'OnlineSecurity_Yes',
-  	       'DeviceProtection_Yes',
+               'OnlineSecurity',
+  	       'DeviceProtection',
    	       'Contract_Month-to-month',
     	       'PaymentMethod_Electronic check']
     df = pd.get_dummies(df).reindex(columns=columns, fill_value=0)
