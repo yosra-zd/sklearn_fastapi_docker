@@ -72,7 +72,7 @@ def prepare_data(df):
     df = pd.get_dummies(df).reindex(columns=columns, fill_value=0)
     #Encoding the other categorical categoric features with more than two categories
     return df
-def batch_file_predict(clean_data,df):    
+def batch_file_predict(clean_data,df_initial):    
     model=load_model()
     #Get batch prediction
     prediction = model.predict(clean_data)
@@ -81,7 +81,7 @@ def batch_file_predict(clean_data,df):
                                            0:'No'})
     #file="data/batch_churn.csv"
     #df = pd.read_csv(file)
-    output = pd.concat([df,prediction_df], axis = 1)
+    output = pd.concat([df_initial,prediction_df], axis = 1)
     return output
 	 
        
