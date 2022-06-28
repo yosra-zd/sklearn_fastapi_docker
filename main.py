@@ -102,7 +102,7 @@ async def batch_predict(file: UploadFile = File(...)):
     df = pd.read_csv(buffer)
     buffer.close()
     data_churn = prepare_data(df)
-    response = batch_file_predict(data_churn,file)
+    response = batch_file_predict(data_churn,df)
     name=file.filename
     result='data/result'
     prediction_result='{}_{}'.format(result,name)
