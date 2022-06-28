@@ -113,6 +113,6 @@ async def batch_predict(file: UploadFile = File(...),response_model=Result):
     return {
         "filename": result.filename,
         "content_type": result.content_type,
-        "predictions": response.to_json(),
-    "}
+        "predictions": response.to_json()
+    }
 
