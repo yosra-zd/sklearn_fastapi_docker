@@ -84,13 +84,16 @@ async def model_predict(input: Input):
     return response
 
 # Define the response JSON
-#class Prediction(BaseModel):
- #   filename: str
-  #  content_type: str
-   # predictions: List[dict] = []	
+class File(BaseModel):
+     filename: str
+     content_type: str
+     file: application/vnd.ms-excel
+class Result(BaseModel):
+      prediction: application/json
+
 @api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'] )
 #, response_model=Prediction)
-async def batch_predict(file: UploadFile = File(...)):
+async def batch_predict(file: UploadFile = File(...),response_model=Result):
     """Predict with file input"""
     # Ensure that the file is a CSV
     if not file.content_type.startswith("application/vnd.ms-excel"):
