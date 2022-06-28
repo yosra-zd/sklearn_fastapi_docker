@@ -90,15 +90,13 @@ class Result(BaseModel):
      predictions: str
  
 
-@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'] )
-#, response_model=Prediction)
-async def batch_predict(file: UploadFile = File(...),response_model=Result):
+@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result )
+
+async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
     if not file.content_type.startswith("application/vnd.ms-excel"):
         raise HTTPException(status_code=400, detail="File format provided is not valid.")
-    #content = await file.read()
-    #file="data/batch_churn.csv"
     contents = await file.read()
     buffer = BytesIO(contents)
     df = pd.read_csv(buffer)
@@ -106,13 +104,7 @@ async def batch_predict(file: UploadFile = File(...),response_model=Result):
     data_churn = prepare_data(df)
     response = batch_file_predict(data_churn)
     result=response.to_csv('data/result.csv',sep='\t')
-    #return response.to_json()
+    return response.to_json()
    
-    #response = batch_file_predict(data_churn)
-     # return the response as a JSON
-    return {
-        "filename": result.filename,
-        "content_type": result.content_type,
-        "predictions": response.to_json()
-    }
+   
 
