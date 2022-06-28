@@ -84,12 +84,11 @@ async def model_predict(input: Input):
     return response
 
 # Define the response JSON
-class File(BaseModel):
+class Result(BaseModel):
      filename: str
      content_type: str
-     file: FileIO
-class Result(BaseModel):
-      prediction: str
+     predictions: str
+ 
 
 @api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'] )
 #, response_model=Prediction)
@@ -106,14 +105,14 @@ async def batch_predict(file: UploadFile = File(...),response_model=Result):
     buffer.close()
     data_churn = prepare_data(df)
     response = batch_file_predict(data_churn)
-    response.to_csv('data/result.csv',sep='\t')
-    return response.to_json()
+    result=response.to_csv('data/result.csv',sep='\t')
+    #return response.to_json()
    
     #response = batch_file_predict(data_churn)
      # return the response as a JSON
-    #return {
-    #    "filename": file.filename,
-    #    "content_type": file.content_type,
-    #    "predictions": response,
-    #"}
+    return {
+        "filename": result.filename,
+        "content_type": result.content_type,
+        "predictions": response.to_json(),
+    "}
 
