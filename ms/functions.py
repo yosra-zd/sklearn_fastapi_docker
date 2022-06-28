@@ -60,9 +60,7 @@ def prepare_data(df):
        df['tenure'] = sc.fit_transform(df[['tenure']])
        df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
        df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
-       
-       df = df[['tenure','InternetService','OnlineSecurity','DeviceProtection','Contract','PaymentMethod']]
-     
+       df = df[['tenure','PaperlessBilling','InternetService','OnlineSecurity','DeviceProtection','Contract','PaymentMethod']]
        columns=['tenure', 
    	       'PaperlessBilling',
    	       'InternetService_Fiber optic',
@@ -72,9 +70,8 @@ def prepare_data(df):
    	       'Contract_Month-to-month',
     	       'PaymentMethod_Electronic check']
         #Encoding the other categorical categoric features with more than two categories
-	df=pd.get_dummies(df).reindex(columns=columns,fill_value=0)
-     return df
-	
+	df = pd.get_dummies(df).reindex(columns=columns,fill_value='0')
+        return df
 def batch_file_predict(input):    
     model=load_model()
     #Get batch prediction
