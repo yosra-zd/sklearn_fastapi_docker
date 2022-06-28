@@ -15,7 +15,17 @@ version = "v1.0.0"
 api = FastAPI(
              title="Customer Churn Prediction API",
              description="API powered by FastAPI.",
-             version="1.0.1")
+             version="1.0.1",
+             openapi_tags=[
+    {
+        'name': 'api_check',
+        'description': 'default API check functions'
+    },
+    {
+        'name': 'prediction',
+        'description': 'functions that are used to predict customer churn'
+    }
+                           ])
 
 # Input for data validation
 class Input(BaseModel):
@@ -51,7 +61,7 @@ class Output(BaseModel):
 
 
 @api.get('/')
-async def model_info():
+async def model_info(tags=['api_check']):
     """Return model information, version, how to call"""
     return {
         "name": model_name,
@@ -59,7 +69,7 @@ async def model_info():
     }
 
 
-@api.get('/health')
+@api.get('/health', tags=['api_heck'])
 async def service_health():
     """Return service health"""
     return {
@@ -67,7 +77,7 @@ async def service_health():
     }
 
 
-@api.post('/predict', response_model=Output)
+@api.post('/predict', response_model=Output, tags=['prediction'])
 async def model_predict(input: Input):
     """Predict with input"""
     response = get_model_response(input)
@@ -78,7 +88,7 @@ async def model_predict(input: Input):
  #   filename: str
   #  content_type: str
    # predictions: List[dict] = []	
-@api.post('/batch_predict',name="Batch File Churn Predict" )
+@api.post('/batch_predict',name="Batch File Churn Predict", tags=['prediction'] )
 #, response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
