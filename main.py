@@ -12,7 +12,10 @@ from ms.functions import get_model_response,batch_file_predict,prepare_data
 model_name = "Churn model"
 version = "v1.0.0"
 
-api = FastAPI()
+api = FastAPI(
+             title="Customer Churn Prediction API",
+             description="API powered by FastAPI.",
+             version="1.0.1")
 
 # Input for data validation
 class Input(BaseModel):
@@ -71,11 +74,11 @@ async def model_predict(input: Input):
     return response
 
 # Define the response JSON
-class Prediction(BaseModel):
-    filename: str
-    content_type: str
-    predictions: List[dict] = []	
-@api.post('/batch_predict')
+#class Prediction(BaseModel):
+ #   filename: str
+  #  content_type: str
+   # predictions: List[dict] = []	
+@api.post('/batch_predict',name="Batch File Churn Predict" )
 #, response_model=Prediction)
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
