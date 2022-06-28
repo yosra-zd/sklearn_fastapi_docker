@@ -79,8 +79,8 @@ def batch_file_predict(input):
     prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
     prediction_df = prediction_df.replace({1:'Yes',
                                            0:'No'})
-    file="data/batch_churn.csv"
-    df = pd.read_csv(file)
+    #file="data/batch_churn.csv"
+    df = pd.read_csv(input)
     output = pd.concat([df,prediction_df], axis = 1)
     return output
 	 
