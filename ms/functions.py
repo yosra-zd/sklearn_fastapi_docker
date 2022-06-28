@@ -73,7 +73,7 @@ def prepare_data(df):
     	       'PaymentMethod_Electronic check']
         #Encoding the other categorical categoric features with more than two categories
         df = pd.get_dummies(df).reindex(columns=columns, fill_value=0)
-       return df
+        return df
 	
 def batch_file_predict(input):    
     model=load_model()
