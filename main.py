@@ -87,9 +87,9 @@ async def model_predict(input: Input):
 class File(BaseModel):
      filename: str
      content_type: str
-     file: application/vnd.ms-excel
+     file: FileIO
 class Result(BaseModel):
-      prediction: application/json
+      prediction: str
 
 @api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'] )
 #, response_model=Prediction)
