@@ -60,17 +60,9 @@ def prepare_data(df):
        df['tenure'] = sc.fit_transform(df[['tenure']])
        df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
        df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
-       #df = pd.get_dummies(df)
-       #df=df[[ 'tenure', 
-   	        'PaperlessBilling',
-   	        'InternetService_Fiber optic',
-   	        'InternetService_No',
-                'OnlineSecurity_Yes',
-  	        'DeviceProtection_Yes',
-   	        'Contract_Month-to-month',
-    	        'PaymentMethod_Electronic check']]
+       
        df = df[['tenure','InternetService','OnlineSecurity','DeviceProtection','Contract','PaymentMethod']]
-       #columns = ['tenure','PaperlessBilling','InternetService_Fiber_optic', 'InternetService_No', 'OnlineSecurity_No_internet_service', 'OnlineSecurity_Yes', 'DeviceProtection_No_internet_service', 'DeviceProtection_Yes','Contract_Month-to-month', 'Contract_One_year', 'Contract_Two_year', 'PaymentMethod_Electronic_check']
+     
        columns=['tenure', 
    	       'PaperlessBilling',
    	       'InternetService_Fiber optic',
