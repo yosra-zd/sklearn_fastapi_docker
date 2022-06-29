@@ -57,9 +57,9 @@ def prepare_data(df):
     df.TotalCharges = pd.to_numeric(df.TotalCharges, downcast="float")
     #feature scaling
     sc = StandardScaler()
-    df['tenure'] = sc.fit_transform(df[['tenure']])
-    df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
-    df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
+    #df['tenure'] = sc.fit_transform(df[['tenure']])
+    #df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
+    #df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
     df = df[['tenure','PaperlessBilling','InternetService','OnlineSecurity','DeviceProtection','Contract','PaymentMethod']]
     columns=['tenure', 
    	       'PaperlessBilling',
