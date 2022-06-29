@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import joblib
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler,StandardScaler
 
 def load_model():
     """
@@ -56,7 +56,7 @@ def prepare_data(df):
     # df.TotalCharges = pd.to_numeric(df.TotalCharges, errors='coerce')
     df.TotalCharges = pd.to_numeric(df.TotalCharges, downcast="float")
     #feature scaling
-    sc = MinMaxScaler()
+    sc = StandardScaler()
     df['tenure'] = sc.fit_transform(df[['tenure']])
     df['MonthlyCharges'] = sc.fit_transform(df[['MonthlyCharges']])
     df['TotalCharges'] = sc.fit_transform(df[['TotalCharges']])
@@ -65,8 +65,8 @@ def prepare_data(df):
    	       'PaperlessBilling',
    	       'InternetService_Fiber optic',
    	       'InternetService_No',
-               'OnlineSecurity',
-  	       'DeviceProtection',
+               'OnlineSecurity_Yes',
+  	       'DeviceProtection_Yes',
    	       'Contract_Month-to-month',
     	       'PaymentMethod_Electronic check']
     df = pd.get_dummies(df).reindex(columns=columns, fill_value=0)
