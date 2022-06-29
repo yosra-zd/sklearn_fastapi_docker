@@ -9,6 +9,7 @@ COPY main.py /churn_project
 COPY requirements_dev.txt /churn_project
 COPY model /churn_project/model
 COPY ms /churn_project/ms
+COPY api_tests.py /churn_project
 
 # Install dependencies
 RUN pip install -r requirements_dev.txt
