@@ -77,7 +77,7 @@ async def service_health():
     }
 
 
-@api.post('/predict', response_model=Output, tags=['Prediction Functions'])
+@api.get('/predict', response_model=Output, tags=['Prediction Functions'])
 async def model_predict(input: Input):
     """Predict with input"""
     response = get_model_response(input)
@@ -90,7 +90,7 @@ class Result(BaseModel):
      predictions: str
  
 
-@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result )
+@api.get('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result )
 
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
