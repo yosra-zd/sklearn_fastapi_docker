@@ -78,7 +78,7 @@ async def service_health():
 
 
 @api.get('/predict', response_model=Output, tags=['Prediction Functions'])
-def model_predict(input: Input):
+async def model_predict(input: Input):
     """Predict with input"""
     response = get_model_response(input)
     return response
