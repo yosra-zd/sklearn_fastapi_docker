@@ -95,8 +95,9 @@ class Result(BaseModel):
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
     # Ensure that the file is a CSV
-    if not file.content_type.startswith("application/vnd.ms-excel"):
-        raise HTTPException(status_code=400, detail="File format provided is not valid.")
+    if not file.content_type.startswith("text/csv") and not file.content_type.startswith("application/vnd.ms-excel"):
+            raise HTTPException(status_code=415, detail="File must be in CSV format with comma separators")
+     
     contents = await file.read()
     buffer = BytesIO(contents)
     df = pd.read_csv(buffer)
