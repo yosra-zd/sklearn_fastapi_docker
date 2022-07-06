@@ -126,7 +126,7 @@ async def batch_predict(file: UploadFile = File(...)):
     response.to_csv(prediction_result,sep='\t')
     #return response.to_json()
     return {
-	"Content-Disposition": attachment; filename=predictions-export.csv
+	"Content-Disposition": 'attachment;filename=predictions-export.csv'
 	"Access-Control-Expose-Headers": Content-Disposition
 	"filename": prediction_result,
 	"content_type": 'CSV file',
