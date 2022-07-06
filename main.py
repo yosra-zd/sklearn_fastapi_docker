@@ -7,6 +7,7 @@ from io import BytesIO
 # Third party imports
 from pydantic import BaseModel, Field, validator
 from typing import List
+from starlette.responses import RedirectResponse, StreamingResponse, JSONResponse, Response
 
 from ms.functions import get_model_response,batch_file_predict,prepare_data
 
@@ -113,28 +114,16 @@ async def batch_predict(file: UploadFile = File(...)):
     #if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
     if not contents:
             raise HTTPException(status_code=204, detail="No content", response_class=Response)
-			
     buffer = BytesIO(contents)
     df = pd.read_csv(buffer)
     buffer.close()
     df_initial=df
     data_clean = prepare_data(df)
-    response = batch_file_predict(data_clean,df_initial)
-    result='data/result'
-    name=file.filename
-    prediction_result='{}_{}'.format(result,name)
-    response.to_csv(prediction_result,sep='\t')
-    #return response.to_json()
-    return {
-	#"Access-Control-Expose-Headers": Content-Disposition
-	"filename": prediction_result,
-	"content_type": 'CSV file',
-	#"filename": file.filename,
-	#"content_type": file.content_type,  
-	"predictions": response.to_json(),
-        "Content-Disposition": 'attachment; filename=predictions_result',
-	"Access-Control-Expose-Headers": 'Content-Disposition'
-
-	}
-
-     
+    Response = batch_file_predict(data_clean,df_initial)
+    stream = io.StringIO()
+    Response.to_csv(stream, index=False)
+    response = StreamingResponse(iter([stream.getvalue()]),
+                                 media_type="text/csv"
+                                 )
+    response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
+    response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
