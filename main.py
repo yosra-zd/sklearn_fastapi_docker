@@ -100,8 +100,14 @@ class Result(BaseModel):
      content_type: str
      predictions: str
  
+responses = {
+    415: {"description": "File Format is invalid"},
+    400: {"description": "the file is empty"},
+    #302: {"description": "The item was moved"},
+    #403: {"description": "Not enough privileges"},
+}
 
-@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result )
+@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result,responses=reponses )
 
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
