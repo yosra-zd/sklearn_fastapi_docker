@@ -48,7 +48,7 @@ def test_batch_predict():
      with open(fpath, "rb") as f:
           response = client.post("/batch_predict", files={"file": ("filename", f, "application/vnd.ms-excel")}) 
           assert response.status_code == 200, response.content
-          assert response.content == b"customerID,Churn,Prediction\n7010-BRBUU,No,No\n9688-YGXVR,No,No\n9286-DOJGF,Yes,Yes\n6994-KERXL,No,Yes\n2181-UAESM,No,No\n4312-GVYNH,No,No\n"
+          assert response.content == b"customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleLines,InternetService,OnlineSecurity,OnlineBackup,DeviceProtection,TechSupport,StreamingTV,StreamingMovies,Contract,PaperlessBilling,PaymentMethod,MonthlyCharges,TotalCharges,Predictions\n8773-HHXXX,0,1,0,1,6,1,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,1,Electronic check,20,35.0,No\n5945-TMRGD,0,0,0,1,1,1,No,Fiber optic,No,No,No,No,Yes,No,Month-to-month,1,Electronic check,80,90.0,Yes\n7942-YXOOG,1,0,0,0,5,1,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,0,Mailed check,20,115.0,No\n4598-ABCDE,0,1,1,1,25,1,No,Fiber optic,No,Yes,Yes,No,Yes,No,One year,1,Electronic check,100,2500.0,Yes\n3192-NQECA,1,0,1,0,68,1,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,Two year,1,Bank transfer (automatic),117,600.0,No\n"
 
           #data = response.json()
            #assert data['Predictions']['0'] == "No"
