@@ -134,4 +134,7 @@ async def batch_predict(file: UploadFile = File(...)):
                                  )
     response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
     response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
-    return response
+    return {
+      "response": response,
+      "predictions": response.to_json()
+    }
