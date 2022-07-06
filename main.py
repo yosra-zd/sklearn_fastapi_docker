@@ -120,9 +120,9 @@ async def batch_predict(file: UploadFile = File(...)):
     buffer.close()
     df_initial=df
     data_clean = prepare_data(df)
-    Response = batch_file_predict(data_clean,df_initial)
+    output = batch_file_predict(data_clean,df_initial)
     stream = io.StringIO()
-    Response.to_csv(stream, index=False)
+    output.to_csv(stream, index=False)
     response = StreamingResponse(iter([stream.getvalue()]),
                                  media_type="text/csv"
                                  )
