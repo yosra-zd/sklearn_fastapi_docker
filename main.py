@@ -108,7 +108,7 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=415, detail="File must be in CSV format with comma separators")
      
     contents = await file.read()
-    if os.path.exists(file) and os.stat(file).st_size == 0:
+    if os.path.exists(file.filename) and os.stat(file.filename).st_size == 0:
             raise HTTPException(status_code=204, detail="No content")
 			
 			
