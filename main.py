@@ -121,6 +121,7 @@ async def batch_predict(file: UploadFile = File(...)):
     data_clean = prepare_data(df)
     response = batch_file_predict(data_clean,df_initial)
     result='data/result'
+    name=file.filename
     prediction_result='{}_{}'.format(result,name)
     response.to_csv(prediction_result,sep='\t')
     #return response.to_json()
