@@ -48,8 +48,9 @@ def test_batch_predict():
      with open(fpath, "rb") as f:
           response = client.post("/batch_predict", files={"file": ("filename", f, "application/vnd.ms-excel")}) 
           assert response.status_code == 200, response.content
+          assert response.content == b"customerID,Churn,Prediction\n7010-BRBUU,No,No\n9688-YGXVR,No,No\n9286-DOJGF,Yes,Yes\n6994-KERXL,No,Yes\n2181-UAESM,No,No\n4312-GVYNH,No,No\n"
+
           #data = response.json()
-          assert response.content == b""customerID":{"0":"8773-HHXXX","1":"5945-TMRGD","2":"7942-YXOOG","3":"4598-ABCDE","4":"3192-NQECA"},"gender":{"0":0,"1":0,"2":1,"3":0,"4":1},"SeniorCitizen":{"0":1,"1":0,"2":0,"3":1,"4":0},"Partner":{"0":0,"1":0,"2":0,"3":1,"4":1},"Dependents":{"0":1,"1":1,"2":0,"3":1,"4":0},"tenure":{"0":6,"1":1,"2":5,"3":25,"4":68},"PhoneService":{"0":1,"1":1,"2":1,"3":1,"4":1},"MultipleLines":{"0":"Yes","1":"No","2":"No","3":"No","4":"Yes"},"InternetService":{"0":"DSL","1":"Fiber optic","2":"No","3":"Fiber optic","4":"Fiber optic"},"OnlineSecurity":{"0":"Yes","1":"No","2":"No internet service","3":"No","4":"No"},"OnlineBackup":{"0":"Yes","1":"No","2":"No internet service","3":"Yes","4":"Yes"},"DeviceProtection":{"0":"Yes","1":"No","2":"No internet service","3":"Yes","4":"Yes"},"TechSupport":{"0":"Yes","1":"No","2":"No internet service","3":"No","4":"Yes"},"StreamingTV":{"0":"Yes","1":"Yes","2":"No internet service","3":"Yes","4":"Yes"},"StreamingMovies":{"0":"Yes","1":"No","2":"No internet service","3":"No","4":"Yes"},"Contract":{"0":"Month-to-month","1":"Month-to-month","2":"Month-to-month","3":"One year","4":"Two year"},"PaperlessBilling":{"0":1,"1":1,"2":0,"3":1,"4":1},"PaymentMethod":{"0":"Electronic check","1":"Electronic check","2":"Mailed check","3":"Electronic check","4":"Bank transfer (automatic)"},"MonthlyCharges":{"0":20,"1":80,"2":20,"3":100,"4":117},"TotalCharges":{"0":35.0,"1":90.0,"2":115.0,"3":2500.0,"4":600.0},"Predictions":{"0":"No","1":"Yes","2":"No","3":"Yes","4":"No"}"
-          #assert data['Predictions']['0'] == "No"
+           #assert data['Predictions']['0'] == "No"
           #assert data['Predictions'] == {'0':"No",'1':"Yes",'2':"No",'3':"Yes",'4':"No"}
 
