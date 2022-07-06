@@ -107,7 +107,7 @@ responses = {
     #403: {"description": "Not enough privileges"},
 }
 
-@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result,responses=reponses )
+@api.post('/batch_predict',name="Batch File Churn Predict", tags=['Prediction Functions'],response_model=Result,responses=responses )
 
 async def batch_predict(file: UploadFile = File(...)):
     """Predict with file input"""
