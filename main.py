@@ -115,24 +115,19 @@ async def batch_predict(file: UploadFile = File(...)):
 	print(os.stat(file.filename).st_size)
 	buffer = BytesIO(contents)
 	df = pd.read_csv(buffer)
- 	buffer.close()
- 	df_initial=df
+	buffer.close()
+	df_initial=df
 	data_clean = prepare_data(df)
 	response = batch_file_predict(data_clean,df_initial)
 	name=file.filename
-    	result='data/result'
-    	prediction_result='{}_{}'.format(result,name)
-   	response.to_csv(prediction_result,sep='\t')
-  	#return response.to_json()
-   	return {
-        "filename": prediction_result,
-        "content_type": 'CSV file',
-        #"filename": file.filename,
-        #"content_type": file.content_type,  
-        "predictions": response.to_json()
-    	}
-
-
-   
-   
-
+	result='data/result'
+	prediction_result='{}_{}'.format(result,name)
+	response.to_csv(prediction_result,sep='\t')
+	#return response.to_json()
+	return {
+	"filename": prediction_result,
+	"content_type": 'CSV file',
+	#"filename": file.filename,
+	#"content_type": file.content_type,  
+	"predictions": response.to_json()
+	}
