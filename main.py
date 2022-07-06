@@ -109,9 +109,10 @@ async def batch_predict(file: UploadFile = File(...)):
      
     contents = await file.read()
     name=file.filename
-    if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
+    if os.path.exists(name) and os.stat(name).st_size == 0:
+    #if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
             raise HTTPException(status_code=204, detail="No content")
 			
     else:
-      print(os.stat('data/{}'.format(name)).st_size)
+      print(os.stat(name).st_size)
      
