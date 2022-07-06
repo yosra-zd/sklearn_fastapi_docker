@@ -108,18 +108,19 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=415, detail="File must be in CSV format with comma separators")
      
     contents = await file.read()
-    if os.path.exists(data/{}.format(file.filename)) and os.stat(data/{}.format(file.filename)).st_size == 0:
+    name=file.filename
+    if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
             raise HTTPException(status_code=204, detail="No content")
 			
     else:
-      print(os.stat(data/{}.format(file.filename)).st_size)
+      print(os.stat('data/{}'.format(name)).st_size)
       buffer = BytesIO(contents)
       df = pd.read_csv(buffer)
       buffer.close()
       df_initial=df
       data_clean = prepare_data(df)
       response = batch_file_predict(data_clean,df_initial)
-      name=file.filename
+      
       result='data/result'
       prediction_result='{}_{}'.format(result,name)
       response.to_csv(prediction_result,sep='\t')
