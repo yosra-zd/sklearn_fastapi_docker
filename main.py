@@ -4,7 +4,7 @@ from fastapi import FastAPI,File,UploadFile,HTTPException
 from fastapi.responses import JSONResponse
 from io import BytesIO
 # Third party imports
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import List
 
 from ms.functions import get_model_response,batch_file_predict,prepare_data
@@ -28,28 +28,36 @@ api = FastAPI(
                            ])
 
 # Input for data validation
+
+
 class Input(BaseModel):
     tenure: int
-    paperless_billing: int
-    internet_service_fiber_optic: int
-    no_internet_service: int
-    online_security: int
-    device_protection: int
-    contract_month_to_month: int
-    payment_method_electronic_check: int
+    no_internet_service: bool = False
+    internet_service_fiber_optic: bool = False
+    online_security: bool = False
+    device_protection: bool = False
+    contract_month_to_month: bool = False
+    payment_method_electronic_check: bool = False
+    paperless_billing: bool = False
 
-    
+    @validator("tenure")
+    def tenure_must_be_int_positive(cls, value):
+        if value < 0:
+            raise ValueError("Tenure value must be greater or equal to zero.")
+        return value
 
     class Config:
         schema_extra = {
-            'tenure': 29,
-            'paperless_billing': 1,
-            'internet_service_fiber_optic': 0,
-            'no_internet_service': 1,
-            'online_security': 0,
-            'device_protection': 0,
-            'contract_month_to_month': 0,
-            'payment_method_electronic_check': 1
+            "example": {
+                'tenure': 2,
+                'no_internet_service': False,
+                'internet_service_fiber_optic': False,
+                'online_security': False,
+                'device_protection': False,
+                'contract_month_to_month': True,
+                'payment_method_electronic_check': True,
+                'paperless_billing': True
+            }
         }
 
 
@@ -99,6 +107,10 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=415, detail="File must be in CSV format with comma separators")
      
     contents = await file.read()
+    if not contents:
+            raise HTTPException(status_code=204, detail="No content")
+			
+			
     buffer = BytesIO(contents)
     df = pd.read_csv(buffer)
     buffer.close()
