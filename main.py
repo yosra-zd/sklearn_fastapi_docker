@@ -112,7 +112,7 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=204, detail="No content")
 			
     else:
-	print(os.stat(file.filename).st_size)
+	#print(os.stat(file.filename).st_size)
 	buffer = BytesIO(contents)
 	df = pd.read_csv(buffer)
 	buffer.close()
