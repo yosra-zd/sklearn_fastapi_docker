@@ -1,5 +1,6 @@
 import uvicorn
 import pandas as pd
+import os
 from fastapi import FastAPI,File,UploadFile,HTTPException
 from fastapi.responses import JSONResponse
 from io import BytesIO
@@ -107,7 +108,7 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=415, detail="File must be in CSV format with comma separators")
      
     contents = await file.read()
-    if not contents:
+    if os.path.exists(file) and os.stat(file).st_size == 0:
             raise HTTPException(status_code=204, detail="No content")
 			
 			
