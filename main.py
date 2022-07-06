@@ -109,12 +109,12 @@ async def batch_predict(file: UploadFile = File(...)):
      
     contents = await file.read()
     buffer = BytesIO(contents)
-   
+    df = pd.read_csv(buffer)
     #if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
-    if not buffer:
+    if df.empty:
             raise HTTPException(status_code=204, detail="No content")
 			
     else:
       print('file not empty')
-      return buffer
+      return df
      
