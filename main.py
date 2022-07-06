@@ -116,4 +116,5 @@ async def batch_predict(file: UploadFile = File(...)):
 			
     else:
       print('file not empty')
+      return buffer
      
