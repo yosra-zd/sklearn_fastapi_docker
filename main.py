@@ -131,8 +131,8 @@ async def batch_predict(file: UploadFile = File(...)):
 	"content_type": 'CSV file',
 	#"filename": file.filename,
 	#"content_type": file.content_type,  
-	"predictions": response.to_json()
-        "file_link": 'attachment;filename=predictions-export.csv'
+	"predictions": response.to_json(),
+        "file_link": "attachment;filename=predictions_result"
 
 	}
 
