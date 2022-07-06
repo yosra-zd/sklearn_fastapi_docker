@@ -132,7 +132,8 @@ async def batch_predict(file: UploadFile = File(...)):
 	#"filename": file.filename,
 	#"content_type": file.content_type,  
 	"predictions": response.to_json(),
-        "file_link": "attachment;filename=predictions_result"
+        "Content-Disposition": attachment;filename=predictions_result,
+	"Access-Control-Expose-Headers": Content-Disposition
 
 	}
 
