@@ -35,7 +35,7 @@ def get_model_response(input):
     }
 	
 def prepare_data(df):
-        expected_columns = [
+    expected_columns = [
         'customerID',
         'gender',
         'SeniorCitizen',
