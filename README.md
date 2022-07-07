@@ -111,6 +111,8 @@ And now we can test our application using Docker
 
 `$ docker run -p 8000:8000 sklearn_fastapi_docker`
 
+RQ: Le script setup.sh permet de lancer le build de l'image et de lancer le container churn-api via docker-compose. 
+
 And then execute below commands as example:
 ///this command should be executed from churn_project/data directory
 curl -X 'POST' \
@@ -143,5 +145,4 @@ The script api_tests.py will be used to test functionnality of API endpoints bas
 
 Finally, the following command will be used to check test results:
 `$  python3 -m pytest api_tests.py`
-
 
