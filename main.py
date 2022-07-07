@@ -103,7 +103,7 @@ class Result(BaseModel):
 responses = {
     415: {"description": "File Format is invalid"},
     400: {"description": "the file is empty"},
-    #302: {"description": "The item was moved"},
+    410: {"description": "There is 1 missing column in file input"},
     #403: {"description": "Not enough privileges"},
 }
 
@@ -151,16 +151,16 @@ async def batch_predict(file: UploadFile = File(...)):
     # Create required features columns if missing
     for column in expected_columns:
         if column not in df:
-            return f"Missing required column '{column}'"
-    else:
-       data_clean = prepare_data(df)
-       output = batch_file_predict(data_clean,df_initial)
-       stream = io.StringIO()
-       output.to_csv(stream, index=False)
-       response = StreamingResponse(iter([stream.getvalue()]),
+            raise HTTPException(status_code=410, detail="missing column {}.format(column)")
+     
+    data_clean = prepare_data(df)
+    utput = batch_file_predict(data_clean,df_initial)
+    stream = io.StringIO()
+    output.to_csv(stream, index=False)
+    response = StreamingResponse(iter([stream.getvalue()]),
                                  media_type="text/csv"
                                  )
-       response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
-       response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
-       response.headers["predictions"]= output.to_json()
-       return response
+    response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
+    response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
+    response.headers["predictions"]= output.to_json()
+    return response
