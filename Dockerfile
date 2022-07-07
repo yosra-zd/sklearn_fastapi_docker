@@ -5,7 +5,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 WORKDIR /churn_project
 
 # Copy files
-COPY churn_project /churn_project
+COPY . /churn_project
  
 # Install dependencies
 RUN python -m pip install --upgrade pip && pip install --no-cache-dir --upgrade -r requirements.txt
