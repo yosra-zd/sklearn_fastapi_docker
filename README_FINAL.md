@@ -1,5 +1,3 @@
-# sklearn_fastapi_docker
-
 Churn rate is an important indicator for subscription-based companies. Identifying customers who aren’t happy can help managers identify product or pricing plan weak 
 points, operation issues, as well as customer preferences and expectations. When you know all that, it’s easier to introduce proactive ways of reducing churn.
 The application to be deployed will function via operational use cases:
@@ -114,7 +112,7 @@ And now we can test our application using Docker
 `$ docker run -p 8000:8000 sklearn_fastapi_docker`
 
 And then execute below commands as example:
-
+///this command should be executed from churn_project/data directory
 curl -X 'POST' \
   'http://127.0.0.1:8000/batch_predict' \
   -H 'accept: application/json' \
@@ -134,7 +132,7 @@ curl -X 'POST' \
   "contract_month_to_month": true,
   "payment_method_electronic_check": true,
   "paperless_billing": true
-}
+}'
 # Test
 
 The script api_tests.py will be used to test functionnality of API endpoints based on below functions:
