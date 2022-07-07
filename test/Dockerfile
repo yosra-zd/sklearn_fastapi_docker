@@ -2,10 +2,10 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 
 # Set working directory
-WORKDIR /churn_project/test/
+WORKDIR /churn_project
 
 # Copy files
-COPY churn_project/test/ /churn_project/test/
+COPY churn_project /churn_project
  
 # Install dependencies
 RUN pip install -r requirements.txt
