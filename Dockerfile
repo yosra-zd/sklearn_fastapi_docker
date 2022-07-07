@@ -8,7 +8,7 @@ WORKDIR /churn_project
 COPY churn_project /churn_project
  
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN python -m pip install --upgrade pip && pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Run the application
 EXPOSE 8000
