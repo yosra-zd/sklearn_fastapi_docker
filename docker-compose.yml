@@ -2,14 +2,14 @@ version: "3.9"
 services:
    test-api:
     image: test_image:latest
-	container_name:predicttest
+    container_name:predicttest
     depends_on:
       - churn-api
    churn-api:
     image:sklearn_fastapi_docker:latest
-	container_name:churnpredict
+    container_name:churnpredict
     depends_on:
       - train
-  train: 
+   train: 
     image:train_image:latest
     container_name:  trainmodel
