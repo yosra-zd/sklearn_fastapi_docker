@@ -1,15 +1,7 @@
 version: "3.9"
 services:
-   test-api:
-    image: test_image:latest
-    container_name:predicttest
-    depends_on:
-      - churn-api
-   churn-api:
-    image:sklearn_fastapi_docker:latest
-    container_name:churnpredict
-    depends_on:
-      - train
-   train: 
-    image:train_image:latest
-    container_name:  trainmodel
+  churn-api:
+    image: sklearn_fastapi_docker:latest
+    ports:
+      - "8000:8000"
+    container_name: churn-api
