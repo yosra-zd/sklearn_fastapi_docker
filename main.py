@@ -102,8 +102,8 @@ class Result(BaseModel):
  
 responses = {
     415: {"description": "File Format is invalid"},
-    400: {"description": "the file is empty"},
-    410: {"description": "There is 1 missing column in file input"},
+    #400: {"description": "the file is empty"},
+    #410: {"description": "There is 1 missing column in file input"},
     #403: {"description": "Not enough privileges"},
 }
 
@@ -120,7 +120,7 @@ async def batch_predict(file: UploadFile = File(...)):
     #df = pd.read_csv(buffer)
     #if os.path.exists('data/{}'.format(name)) and os.stat('data/{}'.format(name)).st_size == 0:
     if not contents:
-            raise HTTPException(status_code=400, detail="No content")
+            raise HTTPException(status_code=415, detail="No content")
     buffer = BytesIO(contents)
     df = pd.read_csv(buffer)
     buffer.close()
@@ -151,7 +151,7 @@ async def batch_predict(file: UploadFile = File(...)):
     # Create required features columns if missing
     for column in expected_columns:
         if column not in df:
-            raise HTTPException(status_code=410, detail="missing column {}".format(column))
+            raise HTTPException(status_code=415, detail="missing column {}".format(column))
      
     data_clean = prepare_data(df)
     output = batch_file_predict(data_clean,df_initial)
