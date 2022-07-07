@@ -151,7 +151,7 @@ async def batch_predict(file: UploadFile = File(...)):
     # Create required features columns if missing
     for column in expected_columns:
         if column not in df:
-            raise HTTPException(status_code=410, detail="missing column {}.format(column)")
+            raise HTTPException(status_code=410, detail="missing column {}".format(column))
      
     data_clean = prepare_data(df)
     output = batch_file_predict(data_clean,df_initial)
