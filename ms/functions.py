@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import joblib
-from sklearn.preprocessing import MinMaxScaler,StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 def load_model():
     """
@@ -35,13 +35,33 @@ def get_model_response(input):
     }
 	
 def prepare_data(df):
-    #if file is not None:
-    # importing the dataset
-    #file="data/batch_churn.csv"
-    #df = pd.read_csv(file,sep=',')
-    #df = pd.read_csv(file)
-    # drop de customerID qui n'est pas une information utile
-    #df.drop(columns='customerID', inplace=True)
+        expected_columns = [
+        'customerID',
+        'gender',
+        'SeniorCitizen',
+        'Partner',
+        'Dependents',
+        'tenure',
+        'PhoneService',
+        'MultipleLines',
+        'InternetService',
+        'OnlineSecurity',
+        'OnlineBackup',
+        'DeviceProtection',
+        'TechSupport',
+        'StreamingTV',
+        'StreamingMovies',
+        'Contract',
+        'PaperlessBilling',
+        'PaymentMethod',
+        'MonthlyCharges',
+        'TotalCharges'
+    ]
+
+    # Create required features columns if missing
+    for column in expected_columns:
+        if column not in df:
+            return f"Missing required column '{column}'"
     # Transformation des labels en données binaires
     df.gender = pd.Series(np.where(df.gender.values == 'Male', 1, 0), df.index)
     df.Partner = pd.Series(np.where(df.Partner.values == 'Yes', 1, 0), df.index)
