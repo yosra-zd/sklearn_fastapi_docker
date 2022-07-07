@@ -154,7 +154,7 @@ async def batch_predict(file: UploadFile = File(...)):
             raise HTTPException(status_code=410, detail="missing column {}.format(column)")
      
     data_clean = prepare_data(df)
-    utput = batch_file_predict(data_clean,df_initial)
+    output = batch_file_predict(data_clean,df_initial)
     stream = io.StringIO()
     output.to_csv(stream, index=False)
     response = StreamingResponse(iter([stream.getvalue()]),
