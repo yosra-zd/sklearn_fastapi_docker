@@ -152,14 +152,15 @@ async def batch_predict(file: UploadFile = File(...)):
     for column in expected_columns:
         if column not in df:
             return f"Missing required column '{column}'"
-    data_clean = prepare_data(df)
-    output = batch_file_predict(data_clean,df_initial)
-    stream = io.StringIO()
-    output.to_csv(stream, index=False)
-    response = StreamingResponse(iter([stream.getvalue()]),
+    else:
+       data_clean = prepare_data(df)
+       output = batch_file_predict(data_clean,df_initial)
+       stream = io.StringIO()
+       output.to_csv(stream, index=False)
+       response = StreamingResponse(iter([stream.getvalue()]),
                                  media_type="text/csv"
                                  )
-    response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
-    response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
-    response.headers["predictions"]= output.to_json()
-    return response
+       response.headers["Content-Disposition"] = "attachment; filename=predictions-export.csv"
+       response.headers["Access-Control-Expose-Headers"] = "Content-Disposition" 
+       response.headers["predictions"]= output.to_json()
+       return response
