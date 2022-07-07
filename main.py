@@ -125,6 +125,33 @@ async def batch_predict(file: UploadFile = File(...)):
     df = pd.read_csv(buffer)
     buffer.close()
     df_initial=df
+    expected_columns = [
+        'customerID',
+        'gender',
+        'SeniorCitizen',
+        'Partner',
+        'Dependents',
+        'tenure',
+        'PhoneService',
+        'MultipleLines',
+        'InternetService',
+        'OnlineSecurity',
+        'OnlineBackup',
+        'DeviceProtection',
+        'TechSupport',
+        'StreamingTV',
+        'StreamingMovies',
+        'Contract',
+        'PaperlessBilling',
+        'PaymentMethod',
+        'MonthlyCharges',
+        'TotalCharges'
+    ]
+
+    # Create required features columns if missing
+    for column in expected_columns:
+        if column not in df:
+            return f"Missing required column '{column}'"
     data_clean = prepare_data(df)
     output = batch_file_predict(data_clean,df_initial)
     stream = io.StringIO()
